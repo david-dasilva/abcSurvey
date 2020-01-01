@@ -20,10 +20,13 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.choix3.clicked.connect(lambda: self.onClickBtn("Borne internet"))
         self.ui.choix4.clicked.connect(lambda: self.onClickBtn("Boite aux lettres"))
 
+        self.fw.seek(0)
         first_char = self.fw.read(1)
         if not first_char:
             self.fw.write("date,motif\n")
             self.fw.flush()
+
+        self.ui.resultLabel.setText("")
 
     def onClickBtn(self, motif):
         print(motif)
