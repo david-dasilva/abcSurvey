@@ -34,20 +34,42 @@ class MyWindow(QtWidgets.QMainWindow):
         self.fw.seek(0)
         first_char = self.fw.read(1)
         if not first_char:
-            self.fw.write("date,motif\n")
+            self.fw.write(Consts.CSV_HEADERS)
             self.fw.flush()
 
         self.ui.resultLabel.setText("")
 
     def onClickBtn(self, motif):
-        print(motif)
         now = datetime.now()
-        time = now.strftime('%H:%M')
+        humanTime = now.strftime('%H:%M')
+        plageHoraire = self.getPlageHoraire(now)
 
-        self.fw.write(f'{now},{motif}\n')
+        self.writeLine(now, plageHoraire, motif)
+        self.changeLastVisit(motif, humanTime)
+
+    def writeLine(self, time, plageHoraire, motif):
+        self.fw.write(f'{time},{plageHoraire},{motif}\n')
         self.fw.flush()
 
+    def changeLastVisit(self, motif, time):
         self.ui.resultLabel.setText(f'Dernière visite : <strong>{motif}</strong> à <strong>{time}</strong>')
+
+    def getPlageHoraire(self, now):
+        time = now.time()
+        if Consts.PLAGE_1_START <= time < Consts.PLAGE_1_END:
+            return Consts.PLAGE_1_LABEL
+        elif Consts.PLAGE_2_START <= time < Consts.PLAGE_2_END:
+            return Consts.PLAGE_2_LABEL
+        elif Consts.PLAGE_3_START <= time < Consts.PLAGE_3_END:
+            return Consts.PLAGE_3_LABEL
+        elif Consts.PLAGE_4_START <= time < Consts.PLAGE_4_END:
+            return Consts.PLAGE_4_LABEL
+        elif Consts.PLAGE_5_START <= time < Consts.PLAGE_5_END:
+            return Consts.PLAGE_5_LABEL
+        elif Consts.PLAGE_6_START <= time < Consts.PLAGE_6_END:
+            return Consts.PLAGE_6_LABEL
+        else: return Consts.PLAGE_AFTER_LABEL
+
 
     def __del__(self):
         self.fw.close()
