@@ -14,75 +14,6 @@
    <string>Sondage Abc</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>50</y>
-      <width>1141</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="choix1">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Renseignements</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="choix2">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Inscriptions</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="choix3">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Borne internet</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="choix4">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Boite aux lettres</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
@@ -127,6 +58,107 @@
     <property name="text">
      <string>Dernière visite enregistrée : Inscription à 10:00</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>1141</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout1">
+       <item>
+        <widget class="QPushButton" name="choix1">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 1</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="choix2">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="choix3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 3</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout2">
+       <item>
+        <widget class="QPushButton" name="choix4">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 4</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="choix5">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 5</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="choix6">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Choix 6</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

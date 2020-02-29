@@ -3,7 +3,7 @@
 import sys
 from datetime import datetime
 import gui  # import du fichier gui.py généré par pyuic5
-
+from consts import Consts
 from PyQt5 import QtWidgets
 
 
@@ -15,10 +15,21 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui = gui.Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.choix1.clicked.connect(lambda: self.onClickBtn("Renseignements"))
-        self.ui.choix2.clicked.connect(lambda: self.onClickBtn("Inscriptions"))
-        self.ui.choix3.clicked.connect(lambda: self.onClickBtn("Borne internet"))
-        self.ui.choix4.clicked.connect(lambda: self.onClickBtn("Boite aux lettres"))
+
+        # Remplissage des labels
+        self.ui.choix1.setText(Consts.MOTIF_CHOIX1)
+        self.ui.choix2.setText(Consts.MOTIF_CHOIX2)
+        self.ui.choix3.setText(Consts.MOTIF_CHOIX3)
+        self.ui.choix4.setText(Consts.MOTIF_CHOIX4)
+        self.ui.choix5.setText(Consts.MOTIF_CHOIX5)
+        self.ui.choix6.setText(Consts.MOTIF_CHOIX6)
+
+        self.ui.choix1.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX1))
+        self.ui.choix2.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX2))
+        self.ui.choix3.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX3))
+        self.ui.choix4.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX4))
+        self.ui.choix5.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX5))
+        self.ui.choix6.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX6))
 
         self.fw.seek(0)
         first_char = self.fw.read(1)
