@@ -3,7 +3,7 @@
 import datetime
 class Consts:
 
-    CSV_HEADERS = "date,plage horaire,motif\n"
+    CSV_HEADERS = "date,jour semaine,plage horaire,motif\n"
 
     # Motifs de visite
     MOTIF_CHOIX1 = "Jeunesse"

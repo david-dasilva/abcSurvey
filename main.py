@@ -42,13 +42,14 @@ class MyWindow(QtWidgets.QMainWindow):
     def onClickBtn(self, motif):
         now = datetime.now()
         humanTime = now.strftime('%H:%M')
+        jourSemaine = now.strftime('%A')
         plageHoraire = self.getPlageHoraire(now)
 
-        self.writeLine(now, plageHoraire, motif)
+        self.writeLine(now, jourSemaine, plageHoraire, motif)
         self.changeLastVisit(motif, humanTime)
 
-    def writeLine(self, time, plageHoraire, motif):
-        self.fw.write(f'{time},{plageHoraire},{motif}\n')
+    def writeLine(self, time, jourSemaine, plageHoraire, motif):
+        self.fw.write(f'{time},{jourSemaine},{plageHoraire},{motif}\n')
         self.fw.flush()
 
     def changeLastVisit(self, motif, time):
