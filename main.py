@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import sys
+
 from datetime import datetime
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
+
 import gui  # import du fichier gui.py généré par pyuic5
 from consts import Consts
 from PyQt5 import QtWidgets
@@ -35,7 +37,8 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.initDb()
 
-        self.ui.resultLabel.setText("")
+        self.ui.tabWidget.currentChanged.connect(lambda: self.onTabChange())
+        self.ui.resultLabel.setText(self.getTotalVisites())
 
     def onClickBtn(self, motif):
         now = datetime.now()
@@ -45,6 +48,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.recordVisit(now, jourSemaine, plageHoraire, motif)
         self.changeLastVisit(motif, humanTime)
+        self.getVisitsByPlageAndMotif()
 
     def recordVisit(self, time, jourSemaine, plageHoraire, motif):
         c = self.conn.cursor()
@@ -52,7 +56,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.conn.commit()
 
     def changeLastVisit(self, motif, time):
-        self.ui.resultLabel.setText(f'Dernière visite : <strong>{motif}</strong> à <strong>{time}</strong>')
+        self.ui.resultLabel.setText(f'Dernière visite : <strong>{motif}</strong> à <strong>{time}</strong> {self.getTotalVisites()}')
 
     def getPlageHoraire(self, now):
         time = now.time()
@@ -74,6 +78,44 @@ class MyWindow(QtWidgets.QMainWindow):
         c = self.conn.cursor()
         c.execute(Consts.CREATE_VISITES_TABLE)
         self.conn.commit()
+
+    def getTotalVisites(self):
+        c = self.conn.cursor()
+        c.execute(Consts.SQL_TOTAL_VISITS)
+        return f'Visites enregistrées : <strong>{c.fetchone()[0]}</strong>'
+
+    def getVisitsByPlageAndMotif(self):
+        c = self.conn.cursor()
+        c.execute(Consts.SQL_VISITS_BY_PLAGE_AND_MOTIF)
+        self.conn.commit()
+
+    def onTabChange(self):
+        tab_name = self.ui.tabWidget.currentWidget().objectName()
+        if (tab_name == "tabData"):
+            self.populateDataTab()
+
+    def populateDataTab(self):
+        print("populateDataTab")
+        c = self.conn.cursor()
+
+        c.execute(Consts.SQL_ALL_VISITS)
+        data = c.fetchall()
+        model = QStandardItemModel()
+        model.setColumnCount(4)
+        header_names = ["Date", "Jour de la semaine", "Plage horaire", "Motif"]
+        model.setHorizontalHeaderLabels(header_names)
+
+        for d in data:
+            row = []
+            for name in d:
+                item = QStandardItem(name)
+                item.setEditable(False)
+                row.append(item)
+            model.appendRow(row)
+        self.ui.tableView.setModel(model)
+        self.ui.tableView.resizeColumnsToContents()
+
+
 
     def __del__(self):
         self.fw.close()

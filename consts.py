@@ -42,8 +42,9 @@ class Consts:
     # Database
     CREATE_VISITES_TABLE = '''CREATE TABLE IF NOT EXISTS visites (date text, jour text, plage text, motif text)'''
     SQL_RECORD_VISIT = '''INSERT INTO visites VALUES (?, ?, ?, ?)'''
-    SQL_TOTAL_VISITS = '''SELECT count(*) from visites'''
+    SQL_ALL_VISITS = '''SELECT * FROM visites order by date asc'''
 
+    SQL_TOTAL_VISITS = '''SELECT count(*) from visites'''
     SQL_VISITS_BY_PLAGE = '''SELECT plage, COUNT(*) AS total FROM visites GROUP BY plage ORDER BY total DESC;'''
     SQL_VISITS_BY_MOTIF = '''SELECT motif, COUNT(*) AS total FROM visites GROUP BY motif ORDER BY total DESC;'''
     SQL_VISITS_BY_DAY = '''SELECT jour, COUNT(*) AS total FROM visites GROUP BY jour ORDER BY total DESC;'''
