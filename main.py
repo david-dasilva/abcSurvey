@@ -28,6 +28,12 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.choix5.setText(Consts.MOTIF_CHOIX5)
         self.ui.choix6.setText(Consts.MOTIF_CHOIX6)
 
+        self.ui.label_analyse1.setText(Consts.ANALYSE_1)
+        self.ui.label_analyse2.setText(Consts.ANALYSE_2)
+        self.ui.label_analyse3.setText(Consts.ANALYSE_3)
+        self.ui.label_analyse4.setText(Consts.ANALYSE_4)
+        self.ui.label_analyse5.setText(Consts.ANALYSE_5)
+
         self.ui.choix1.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX1))
         self.ui.choix2.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX2))
         self.ui.choix3.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX3))
@@ -92,28 +98,57 @@ class MyWindow(QtWidgets.QMainWindow):
     def onTabChange(self):
         tab_name = self.ui.tabWidget.currentWidget().objectName()
         if (tab_name == "tabData"):
-            self.populateDataTab()
+            self.populateDataView()
+        if (tab_name == "tabAnalysis"):
+            self.populateStatsView()
 
-    def populateDataTab(self):
-        print("populateDataTab")
+    def populateDataView(self):
         c = self.conn.cursor()
 
         c.execute(Consts.SQL_ALL_VISITS)
         data = c.fetchall()
-        model = QStandardItemModel()
-        model.setColumnCount(4)
         header_names = ["Date", "Jour de la semaine", "Plage horaire", "Motif"]
+        self.populateTable(self.ui.allDataTableView, header_names, data)
+
+
+    def populateStatsView(self):
+        c = self.conn.cursor()
+
+        c.execute(Consts.SQL_VISITS_BY_MOTIF)
+        visits_by_motif = c.fetchall()
+        self.populateTable(self.ui.tableView_1, ["Motif", "Visites"], visits_by_motif)
+
+        c.execute(Consts.SQL_VISITS_BY_DAY)
+        visits_by_day = c.fetchall()
+        self.populateTable(self.ui.tableView_2, ["Jour", "Visites"], visits_by_day)
+
+        c.execute(Consts.SQL_VISITS_BY_PLAGE)
+        visits_by_plage = c.fetchall()
+        self.populateTable(self.ui.tableView_3, ["Plage horaire", "Visites"], visits_by_plage)
+
+        c.execute(Consts.SQL_VISITS_BY_PLAGE_AND_MOTIF)
+        visits_by_plage_and_motif = c.fetchall()
+        self.populateTable(self.ui.tableView_4, ["Plage horaire", "Motif", "Visites"], visits_by_plage_and_motif)
+
+        c.execute(Consts.SQL_VISITS_BY_DAY_PLAGE_AND_MOTIF)
+        visits_by_day_plage_and_motif = c.fetchall()
+        self.populateTable(self.ui.tableView_5, ["Jour", "Plage horaire", "Motif", "Visites"], visits_by_day_plage_and_motif)
+
+    def populateTable(self, tableView, header_names, data):
+        model = QStandardItemModel()
+        model.setColumnCount(len(header_names))
         model.setHorizontalHeaderLabels(header_names)
 
         for d in data:
             row = []
             for name in d:
-                item = QStandardItem(name)
+                item = QStandardItem(f'{name}')
                 item.setEditable(False)
                 row.append(item)
             model.appendRow(row)
-        self.ui.tableView.setModel(model)
-        self.ui.tableView.resizeColumnsToContents()
+
+        tableView.setModel(model)
+        tableView.resizeColumnsToContents()
 
 
 

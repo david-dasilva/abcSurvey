@@ -222,7 +222,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="tableView"/>
+           <widget class="QTableView" name="allDataTableView"/>
           </item>
          </layout>
         </item>

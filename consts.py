@@ -4,6 +4,11 @@ import datetime
 
 
 class Consts:
+
+    TAB_1 = "Visites"
+    TAB_2 = "Données"
+    TAB_3 = "Analyse"
+
     # Motifs de visite
     MOTIF_CHOIX1 = "Jeunesse"
     MOTIF_CHOIX2 = "Vie associative"
@@ -38,6 +43,12 @@ class Consts:
     PLAGE_6_END = datetime.time().replace(hour=19, minute=00, second=0, microsecond=0)
 
     PLAGE_AFTER_LABEL = "hors ouverture"
+
+    ANALYSE_1 = "Nombre de visites par motif"
+    ANALYSE_2 = "Nombre de visites par jour de semaine"
+    ANALYSE_3 = "Nombre de visites par plage horaire"
+    ANALYSE_4 = "Nombre de visites par plage horaire et par motif"
+    ANALYSE_5 = "Nombre de visites par jour, par plage horaire et par motif"
 
     # Database
     CREATE_VISITES_TABLE = '''CREATE TABLE IF NOT EXISTS visites (date text, jour text, plage text, motif text)'''
