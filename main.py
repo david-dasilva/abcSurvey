@@ -33,6 +33,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.label_analyse3.setText(Consts.ANALYSE_3)
         self.ui.label_analyse4.setText(Consts.ANALYSE_4)
         self.ui.label_analyse5.setText(Consts.ANALYSE_5)
+        self.ui.label_analyse6.setText(Consts.ANALYSE_6)
 
         self.ui.choix1.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX1))
         self.ui.choix2.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX2))
@@ -130,9 +131,13 @@ class MyWindow(QtWidgets.QMainWindow):
         visits_by_plage_and_motif = c.fetchall()
         self.populateTable(self.ui.tableView_4, ["Plage horaire", "Motif", "Visites"], visits_by_plage_and_motif)
 
+        c.execute(Consts.SQL_VISITS_BY_PLAGE_AND_DAY)
+        visits_by_plage_and_day = c.fetchall()
+        self.populateTable(self.ui.tableView_5, ["Jour", "Plage horaire", "Visites"], visits_by_plage_and_day)
+
         c.execute(Consts.SQL_VISITS_BY_DAY_PLAGE_AND_MOTIF)
         visits_by_day_plage_and_motif = c.fetchall()
-        self.populateTable(self.ui.tableView_5, ["Jour", "Plage horaire", "Motif", "Visites"], visits_by_day_plage_and_motif)
+        self.populateTable(self.ui.tableView_6, ["Jour", "Plage horaire", "Motif", "Visites"], visits_by_day_plage_and_motif)
 
     def populateTable(self, tableView, header_names, data):
         model = QStandardItemModel()

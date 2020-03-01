@@ -242,9 +242,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-242</y>
+             <y>-429</y>
              <width>1094</width>
-             <height>629</height>
+             <height>743</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
@@ -268,7 +268,7 @@
               <item>
                <widget class="QLabel" name="label_analyse1">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>analyse1</string>
                 </property>
                </widget>
               </item>
@@ -278,7 +278,7 @@
               <item>
                <widget class="QLabel" name="label_analyse2">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>analyse2</string>
                 </property>
                </widget>
               </item>
@@ -288,7 +288,7 @@
               <item>
                <widget class="QLabel" name="label_analyse3">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>analyse3</string>
                 </property>
                </widget>
               </item>
@@ -298,7 +298,7 @@
               <item>
                <widget class="QLabel" name="label_analyse4">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>analyse4</string>
                 </property>
                </widget>
               </item>
@@ -308,12 +308,22 @@
               <item>
                <widget class="QLabel" name="label_analyse5">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string>analyse5</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QTableView" name="tableView_5"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_analyse6">
+                <property name="text">
+                 <string>analyse6</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableView" name="tableView_6"/>
               </item>
              </layout>
             </item>

@@ -48,7 +48,8 @@ class Consts:
     ANALYSE_2 = "Nombre de visites par jour de semaine"
     ANALYSE_3 = "Nombre de visites par plage horaire"
     ANALYSE_4 = "Nombre de visites par plage horaire et par motif"
-    ANALYSE_5 = "Nombre de visites par jour, par plage horaire et par motif"
+    ANALYSE_5 = "Nombre de visites par jour de semaine et par plage horaire"
+    ANALYSE_6 = "Nombre de visites par jour, par plage horaire et par motif"
 
     # Database
     CREATE_VISITES_TABLE = '''CREATE TABLE IF NOT EXISTS visites (date text, jour text, plage text, motif text)'''
@@ -60,4 +61,5 @@ class Consts:
     SQL_VISITS_BY_MOTIF = '''SELECT motif, COUNT(*) AS total FROM visites GROUP BY motif ORDER BY total DESC;'''
     SQL_VISITS_BY_DAY = '''SELECT jour, COUNT(*) AS total FROM visites GROUP BY jour ORDER BY total DESC;'''
     SQL_VISITS_BY_PLAGE_AND_MOTIF = '''SELECT plage, motif, COUNT(*) AS total FROM visites GROUP BY plage, motif ORDER BY total DESC;'''
+    SQL_VISITS_BY_PLAGE_AND_DAY = '''SELECT jour, plage, COUNT(*) AS total FROM visites GROUP BY jour, plage ORDER BY total DESC;'''
     SQL_VISITS_BY_DAY_PLAGE_AND_MOTIF = '''SELECT jour, plage, motif, COUNT(*) AS total FROM visites GROUP BY jour, plage, motif ORDER BY total DESC;'''
