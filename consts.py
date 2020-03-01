@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import datetime
+
+
 class Consts:
-
-    CSV_HEADERS = "date,jour semaine,plage horaire,motif\n"
-
     # Motifs de visite
     MOTIF_CHOIX1 = "Jeunesse"
     MOTIF_CHOIX2 = "Vie associative"
@@ -39,3 +38,14 @@ class Consts:
     PLAGE_6_END = datetime.time().replace(hour=19, minute=00, second=0, microsecond=0)
 
     PLAGE_AFTER_LABEL = "hors ouverture"
+
+    # Database
+    CREATE_VISITES_TABLE = '''CREATE TABLE IF NOT EXISTS visites (date text, jour text, plage text, motif text)'''
+    SQL_RECORD_VISIT = '''INSERT INTO visites VALUES (?, ?, ?, ?)'''
+    SQL_TOTAL_VISITS = '''SELECT count(*) from visites'''
+
+    SQL_VISITS_BY_PLAGE = '''SELECT plage, COUNT(*) AS total FROM visites GROUP BY plage ORDER BY total DESC;'''
+    SQL_VISITS_BY_MOTIF = '''SELECT motif, COUNT(*) AS total FROM visites GROUP BY motif ORDER BY total DESC;'''
+    SQL_VISITS_BY_DAY = '''SELECT jour, COUNT(*) AS total FROM visites GROUP BY jour ORDER BY total DESC;'''
+    SQL_VISITS_BY_PLAGE_AND_MOTIF = '''SELECT plage, motif, COUNT(*) AS total FROM visites GROUP BY plage, motif ORDER BY total DESC;'''
+    SQL_VISITS_BY_DAY_PLAGE_AND_MOTIF = '''SELECT jour, plage, motif, COUNT(*) AS total FROM visites GROUP BY jour, plage, motif ORDER BY total DESC;'''

@@ -5,10 +5,12 @@ from datetime import datetime
 import gui  # import du fichier gui.py généré par pyuic5
 from consts import Consts
 from PyQt5 import QtWidgets
+import sqlite3
 
 
 class MyWindow(QtWidgets.QMainWindow):
     fw = open("data.csv", "a+")
+    conn = sqlite3.connect("abcsurvey.db")
 
     def __init__(self, parent=None):
         QtWidgets.QMainWindow.__init__(self, parent)
@@ -31,11 +33,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.choix5.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX5))
         self.ui.choix6.clicked.connect(lambda: self.onClickBtn(Consts.MOTIF_CHOIX6))
 
-        self.fw.seek(0)
-        first_char = self.fw.read(1)
-        if not first_char:
-            self.fw.write(Consts.CSV_HEADERS)
-            self.fw.flush()
+        self.initDb()
 
         self.ui.resultLabel.setText("")
 
@@ -45,12 +43,13 @@ class MyWindow(QtWidgets.QMainWindow):
         jourSemaine = now.strftime('%A')
         plageHoraire = self.getPlageHoraire(now)
 
-        self.writeLine(now, jourSemaine, plageHoraire, motif)
+        self.recordVisit(now, jourSemaine, plageHoraire, motif)
         self.changeLastVisit(motif, humanTime)
 
-    def writeLine(self, time, jourSemaine, plageHoraire, motif):
-        self.fw.write(f'{time},{jourSemaine},{plageHoraire},{motif}\n')
-        self.fw.flush()
+    def recordVisit(self, time, jourSemaine, plageHoraire, motif):
+        c = self.conn.cursor()
+        c.execute(Consts.SQL_RECORD_VISIT, (time, jourSemaine, plageHoraire, motif))
+        self.conn.commit()
 
     def changeLastVisit(self, motif, time):
         self.ui.resultLabel.setText(f'Dernière visite : <strong>{motif}</strong> à <strong>{time}</strong>')
@@ -71,9 +70,14 @@ class MyWindow(QtWidgets.QMainWindow):
             return Consts.PLAGE_6_LABEL
         else: return Consts.PLAGE_AFTER_LABEL
 
+    def initDb(self):
+        c = self.conn.cursor()
+        c.execute(Consts.CREATE_VISITES_TABLE)
+        self.conn.commit()
 
     def __del__(self):
         self.fw.close()
+        self.conn.close()
 
 if __name__ == '__main__':
     import sys
