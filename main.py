@@ -11,7 +11,6 @@ import sqlite3
 
 
 class MyWindow(QtWidgets.QMainWindow):
-    fw = open("data.csv", "a+")
     conn = sqlite3.connect("abcsurvey.db")
 
     def __init__(self, parent=None):
