@@ -4,7 +4,7 @@ Le but de l'application est d'enregistrer l'heure et le motif des visites à l'A
 
 ## Installation
 
-1. Télécharger le zip de l'application et le dézipper sur le PC de l'accueil (par ex: dans `C:\abcSurvey`)
+1. Télécharger le [zip de l'application](https://github.com/david-dasilva/abcSurvey/archive/latest.zip)et le dézipper sur le PC de l'accueil (par ex: dans `C:\abcSurvey`)
 2. Créer un raccourci sur le bureau, pointant sur `C:\abcSurvey\dist\abcSurvey-windows.exe`
 3. Executer une première fois l'application, pour que la base de données soit générée : un fichier `abcsurvey.db` va être créé dans `C:\abcSurvey\dist\`. **Il est impératif de ne pas supprimer ce fichier, sinon toutes les données sont perdues!**
 
