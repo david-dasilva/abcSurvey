@@ -17,6 +17,7 @@ class MyWindow(QtWidgets.QMainWindow):
         QtWidgets.QMainWindow.__init__(self, parent)
         self.ui = gui.Ui_MainWindow()
         self.ui.setupUi(self)
+        self.total_records_widget = QtWidgets.QLabel()
 
 
         # Remplissage des labels
@@ -44,7 +45,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.initDb()
 
         self.ui.tabWidget.currentChanged.connect(lambda: self.onTabChange())
-        self.ui.resultLabel.setText(self.getTotalVisites())
+        self.total_records_widget.setText(self.getTotalVisites())
+        self.ui.statusBar.addPermanentWidget(self.total_records_widget)
 
     def onClickBtn(self, motif):
         now = datetime.now()
@@ -62,7 +64,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.conn.commit()
 
     def changeLastVisit(self, motif, time):
-        self.ui.resultLabel.setText(f'Dernière visite : <strong>{motif}</strong> à <strong>{time}</strong> {self.getTotalVisites()}')
+        self.ui.statusBar.showMessage(f'La visite a été enregistrée : {motif} à {time}', 2000)
+        self.total_records_widget.setText(self.getTotalVisites())
 
     def getPlageHoraire(self, now):
         time = now.time()
@@ -88,7 +91,7 @@ class MyWindow(QtWidgets.QMainWindow):
     def getTotalVisites(self):
         c = self.conn.cursor()
         c.execute(Consts.SQL_TOTAL_VISITS)
-        return f'Visites enregistrées : <strong>{c.fetchone()[0]}</strong>'
+        return f'Total des visites enregistrées : {c.fetchone()[0]}'
 
     def getVisitsByPlageAndMotif(self):
         c = self.conn.cursor()
