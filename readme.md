@@ -24,6 +24,10 @@ Une série de requêtes sur les données enregistrées est disponible n'importe 
 
 Une fois l'étude jugée terminée, il est possible de créer de nouvelles requêtes plus fines sur les données obtenues, **à condition de bien conserver le fichier `abcSurvey.db`**
 
+## Contact
+
+Pour toute question sur le logiciel, merci de s'adresser à Julien, ou à moi-même par e-mail : contact@daviddasilva.net
+
 ## Développement
 
 La base de donnée repose sur SQLite.
